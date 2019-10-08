@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, ScrollView, FlatList, } from 'react-native';
 
+import GoalItem from './src/Atom/GoalItem'
+
 export default function App() {
   const [enteredGoal, setEnteredGoal] = useState('');
   const [courseGoals, setCourseGoals] = useState([]);
@@ -12,7 +14,7 @@ export default function App() {
   const addGoalHandler = () => {
     setCourseGoals(currentGoals => [
       ...currentGoals, 
-      { key: Math.random().toString(), value: enteredGoal }
+      { id: Math.random().toString(), value: enteredGoal }
     ]);
   };
 
@@ -32,20 +34,8 @@ export default function App() {
       <FlatList
         keyExtractor={(item, index)=> item.id}
         data={courseGoals}
-        renderItem={itemData => (
-          <View style={styles.listItem}>
-            <Text>{itemData.item.value}</Text>
-          </View>
-        )}
+        renderItem={itemData => <GoalItem title={itemData.item.value} />}
       />
-      {/* <ScrollView >
-        {courseGoals.map((goal) => 
-          <View style={styles.listItem}>
-            <Text key={goal}>{goal}</Text>
-          </View>
-        )}
-        {courseChars.map((char) => <Text key={char}>{char}</Text>)}
-      </ScrollView> */}
     </View>
   );
 }
@@ -65,11 +55,4 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10
   },
-  listItem: {
-     padding: 10,
-     marginVertical: 10,
-     backgroundColor: '#ccc',
-     borderColor: 'black',
-     borderWidth: 1
-  }
 });
