@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, FlatList, } from 'react-native';
+import { StyleSheet, View, FlatList, Button} from 'react-native';
 
 import GoalItem from './src/Atom/GoalItem'
 import GoalInput from './src/Molekul/GoalInput'
 
 export default function App() {
   const [courseGoals, setCourseGoals] = useState([]);
+  const [isAddMode, setIsAddMode] = useState(false)
 
   
   const addGoalHandler = goalTitle => {
@@ -16,7 +17,7 @@ export default function App() {
   };
 
   
-  const removeGoalHandler = goalId => {
+  const removeGoalHandler = (goalId) => {
     setCourseGoals(currentGoals => {
       return currentGoals.filter((goal) => goal.id !== goalId);
     });
@@ -26,8 +27,13 @@ export default function App() {
 
     
     <View style={styles.screen}>
+      <Button
+        title="Add New Goal"
+        onPress={() => setIsAddMode(true)}
+      />
       <GoalInput 
         onAddGoal={addGoalHandler}
+        visible={isAddMode}
       />
       <FlatList
         keyExtractor={(item, index)=> item.id}
