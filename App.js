@@ -14,6 +14,7 @@ export default function App() {
       ...currentGoals, 
       { id: Math.random().toString(), value: goalTitle }
     ]);
+    setIsAddMode(false);
   };
 
   
@@ -21,6 +22,10 @@ export default function App() {
     setCourseGoals(currentGoals => {
       return currentGoals.filter((goal) => goal.id !== goalId);
     });
+  };
+
+  const cancelGoalAdditionHandler = () => {
+    setIsAddMode(false);
   };
 
   return (
@@ -34,6 +39,7 @@ export default function App() {
       <GoalInput 
         onAddGoal={addGoalHandler}
         visible={isAddMode}
+        onCancel={cancelGoalAdditionHandler}
       />
       <FlatList
         keyExtractor={(item, index)=> item.id}
