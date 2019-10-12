@@ -7,6 +7,9 @@ import {
     StyleSheet
 } from "react-native";
 
+import ButtonCustom from "../Atom/ButtonCustom/ButtonCustom";
+import TextInputCustom from "../Atom/TextInputCustom/TextInputCustom";
+
 const GoalInput = props => {
 
     // initial state
@@ -26,15 +29,25 @@ const GoalInput = props => {
     return (
         <Modal visible={props.visible} animationType="slide">
             <View style={styles.inputContainer}>
-                <TextInput
+                <TextInputCustom
                     placeholder="Course Goal"
-                    style={styles.input}
+                    placeholderTextColor="#cecece"
                     onChangeText={goalInputHandler}
                     value={enteredGoal}
                 />
-                {/* <Button title="ADD" onPress={()=>props.onAddGoal(enteredGoal)} /> */}
-                <Button title="CANCEL" color="red" onPress={props.onCancel} />
-                <Button title="ADD" onPress={addGoalHandler} />
+                <View style={styles.buttonContainer}>
+                    {/* <Button title="ADD" onPress={()=>props.onAddGoal(enteredGoal)} /> */}
+                    <ButtonCustom
+                        title="CANCEL"
+                        color="red"
+                        onPress={props.onCancel}
+                    />
+                    <ButtonCustom
+                        title="ADD"
+                        color=""
+                        onPress={addGoalHandler}
+                    />
+                </View>
             </View>
         </Modal>
     );
@@ -46,11 +59,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    input: {
-        width: '80%',
-        borderColor: 'black',
-        borderWidth: 1,
-        padding: 10
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        width: '60%',
+        marginTop: 5
     },
 });
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, FlatList, Button} from 'react-native';
 
-import GoalItem from './src/Atom/GoalItem'
+import GoalItem from './src/Molekul/GoalItem'
 import GoalInput from './src/Molekul/GoalInput'
 
 export default function App() {
@@ -28,13 +28,17 @@ export default function App() {
     setIsAddMode(false);
   };
 
+  const openModal = () => {
+    setIsAddMode(true);
+  }
+
   return (
 
     
     <View style={styles.screen}>
       <Button
         title="Add New Goal"
-        onPress={() => setIsAddMode(true)}
+        onPress={openModal}
       />
       <GoalInput 
         onAddGoal={addGoalHandler}
